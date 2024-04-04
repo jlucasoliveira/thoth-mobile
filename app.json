@@ -5,7 +5,7 @@
     "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "schema": "br.com.thoth.app",
+    "scheme": "br.com.thoth.app",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",

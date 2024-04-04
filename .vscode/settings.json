@@ -1,5 +1,4 @@
 {
-    "cSpell.words": [
-        "thoth"
-    ]
+  "cSpell.words": ["commitlint", "thoth"],
+  "editor.formatOnSave": true
 }

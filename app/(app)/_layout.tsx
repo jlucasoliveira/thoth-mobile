@@ -10,9 +10,8 @@ SplashScreen.preventAutoHideAsync();
 export default function AppLayout(): React.JSX.Element | null {
   const { isLoading, isAuthenticated } = useAuth();
   const [hasLoaded, fontError] = useFonts({
-    InterLight: require("../../assets/fonts/Inter-Light.ttf"),
-    InterRegular: require("../../assets/fonts/Inter-Regular.ttf"),
-    InterSemibold: require("../../assets/fonts/Inter-SemiBold.ttf"),
+    Inter: require("@tamagui/font-inter/otf/Inter-Medium.otf"),
+    InterBold: require("@tamagui/font-inter/otf/Inter-Bold.otf"),
   });
 
   React.useEffect(() => {

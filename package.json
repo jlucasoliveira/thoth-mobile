@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.0",
+    "@hookform/resolvers": "^3.3.4",
     "@react-navigation/native": "^6.0.2",
     "@tamagui/config": "^1.94.4",
     "expo": "~50.0.4",
@@ -35,7 +36,8 @@
     "react-native-screens": "~3.29.0",
     "react-native-svg": "^15.1.0",
     "react-native-web": "~0.19.6",
-    "tamagui": "^1.94.3"
+    "tamagui": "^1.94.3",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

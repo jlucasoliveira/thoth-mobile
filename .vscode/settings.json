@@ -1,4 +1,12 @@
 {
-  "cSpell.words": ["commitlint", "hookform", "Pressable", "tamagui", "thoth"],
+  "cSpell.words": [
+    "commitlint",
+    "hookform",
+    "netinfo",
+    "Pressable",
+    "tamagui",
+    "tanstack",
+    "thoth"
+  ],
   "editor.formatOnSave": true
 }

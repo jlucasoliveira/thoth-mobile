@@ -6,7 +6,8 @@
     "Pressable",
     "tamagui",
     "tanstack",
-    "thoth"
+    "thoth",
+    "zustand"
   ],
   "editor.formatOnSave": true
 }

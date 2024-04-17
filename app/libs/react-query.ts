@@ -6,6 +6,7 @@ import type {
   UseInfiniteQueryOptions,
   UseMutationOptions,
   DefaultOptions,
+  UseMutationResult,
 } from "@tanstack/react-query";
 
 onlineManager.setEventListener((setOnline) => {
@@ -40,3 +41,5 @@ export type MutationConfig<MutationFnType extends (...args: any) => any> = UseMu
   AxiosError,
   Parameters<MutationFnType>[0]
 >;
+
+export type UseResult<P, R> = UseMutationResult<R, AxiosError<unknown, any>, P, unknown>;

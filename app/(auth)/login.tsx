@@ -1,9 +1,10 @@
 import React, { useRef } from "react";
-import { View, Image, Button } from "tamagui";
+import { View, Image, Button, Spinner } from "tamagui";
 import { KeyboardAvoidingView, type TextInput } from "react-native";
 import { type InferType, object, string } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { useLogin } from "@/hooks/auth/login";
 import { Input } from "@/components/form/Input";
 
 const schema = object().shape({
@@ -15,7 +16,12 @@ type FormType = InferType<typeof schema>;
 
 export default function Login(): React.JSX.Element {
   const passwordRef = useRef<TextInput>(null);
-  const { control } = useForm<FormType>({ resolver: yupResolver(schema) });
+  const { control, handleSubmit } = useForm<FormType>({ resolver: yupResolver(schema) });
+  const { isPending, mutate } = useLogin();
+
+  function onSubmit(payload: FormType): void {
+    mutate(payload);
+  }
 
   return (
     <View flexGrow={1} backgroundColor="white" justifyContent="center">
@@ -46,7 +52,9 @@ export default function Login(): React.JSX.Element {
             name="password"
             type="password"
           />
-          <Button>Entrar</Button>
+          <Button icon={isPending ? <Spinner /> : undefined} onPress={handleSubmit(onSubmit)}>
+            Entrar
+          </Button>
         </View>
       </KeyboardAvoidingView>
     </View>

@@ -66,7 +66,12 @@ export const Input = forwardRef(function InputComponent<T extends FieldValues>(
             {type === "password" ? (
               <Pressable
                 onPress={onToggle}
-                style={{ width: "10%", justifyContent: "center", alignItems: "center" }}
+                style={{
+                  width: "10%",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  paddingEnd: 8,
+                }}
               >
                 {isOpen ? <ViewOffIcon /> : <ViewIcon />}
               </Pressable>

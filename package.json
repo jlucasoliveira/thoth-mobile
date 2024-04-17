@@ -50,6 +50,7 @@
     "@tamagui/babel-plugin": "^1.94.4",
     "@tanstack/eslint-plugin-query": "^5.28.11",
     "@types/react": "~18.2.45",
+    "@types/uuid": "^9.0.8",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",

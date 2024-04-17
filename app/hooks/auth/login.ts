@@ -5,7 +5,7 @@ import { useUserStore } from "@/stores/user";
 import { storage } from "@/utils/storage";
 
 export type LoginCredentialsDTO = {
-  email: string;
+  username: string;
   password: string;
 };
 
@@ -13,13 +13,13 @@ export type AccessModel = {
   access_token: string;
 };
 
-async function loginWithEmailAndPassword(payload: LoginCredentialsDTO): Promise<AccessModel> {
+async function loginWithUsernameAndPassword(payload: LoginCredentialsDTO): Promise<AccessModel> {
   const { data } = await axios.post<AccessModel>("/auth/login", payload);
   return data;
 }
 
 type UseLogin = {
-  config?: MutationConfig<typeof loginWithEmailAndPassword>;
+  config?: MutationConfig<typeof loginWithUsernameAndPassword>;
 };
 
 function useLogin({ config }: UseLogin = {}): UseResult<LoginCredentialsDTO, AccessModel> {
@@ -28,7 +28,7 @@ function useLogin({ config }: UseLogin = {}): UseResult<LoginCredentialsDTO, Acc
   return useMutation({
     ...config,
     mutationKey: ["login"],
-    mutationFn: loginWithEmailAndPassword,
+    mutationFn: loginWithUsernameAndPassword,
     onSuccess: async (data) => {
       setToken(data.access_token);
       await storage.setItem("token", data.access_token);
@@ -36,4 +36,4 @@ function useLogin({ config }: UseLogin = {}): UseResult<LoginCredentialsDTO, Acc
   });
 }
 
-export { loginWithEmailAndPassword, useLogin };
+export { loginWithUsernameAndPassword, useLogin };

@@ -7,6 +7,7 @@ import type {
   UseMutationOptions,
   DefaultOptions,
   UseMutationResult,
+  UseQueryResult as UseQueryResultTemplate,
 } from "@tanstack/react-query";
 
 onlineManager.setEventListener((setOnline) => {
@@ -43,3 +44,4 @@ export type MutationConfig<MutationFnType extends (...args: any) => any> = UseMu
 >;
 
 export type UseResult<P, R> = UseMutationResult<R, AxiosError<unknown, any>, P, unknown>;
+export type UseQueryResult<R> = UseQueryResultTemplate<R, Error>;

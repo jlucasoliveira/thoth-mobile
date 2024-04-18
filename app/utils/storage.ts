@@ -57,4 +57,20 @@ export class StorageService {
   }
 }
 
-export const storage = new StorageService();
+class AppStorageService extends StorageService {
+  private readonly TOKEN_SFX = "token";
+
+  async getToken(): Promise<string | null> {
+    return await this.getItemAsync(this.TOKEN_SFX);
+  }
+
+  async setToken(value: string | null): Promise<void> {
+    await this.setItem(this.TOKEN_SFX, value);
+  }
+
+  async clearToken(): Promise<void> {
+    await this.clearItem(this.TOKEN_SFX);
+  }
+}
+
+export const storage = new AppStorageService();

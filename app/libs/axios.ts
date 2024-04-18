@@ -26,7 +26,7 @@ const axios = Axios.create({
 });
 
 async function handleUnAuthorizedError(): Promise<void> {
-  await storage.clearItem("token");
+  await storage.clearToken();
 }
 
 axios.interceptors.request.use(authRequestInterceptor);

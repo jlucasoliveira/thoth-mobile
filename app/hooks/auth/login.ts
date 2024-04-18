@@ -31,7 +31,7 @@ function useLogin({ config }: UseLogin = {}): UseResult<LoginCredentialsDTO, Acc
     mutationFn: loginWithUsernameAndPassword,
     onSuccess: async (data) => {
       setToken(data.access_token);
-      await storage.setItem("token", data.access_token);
+      await storage.setToken(data.access_token);
     },
   });
 }

@@ -5,7 +5,12 @@
     "paths": {
       "@/*": ["./app/*"],
       "@/assets/*": ["./assets/*"]
-    }
+    },
+    /* Linting */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+
   },
   "include": [
     "**/*.ts",
@@ -14,5 +19,6 @@
     "expo-env.d.ts",
     "babel.config.js",
     "metro.config.js"
-  ]
+  ],
+  "exclude": ["node_modules/**/*"]
 }

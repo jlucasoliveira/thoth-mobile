@@ -7,6 +7,7 @@ import * as Notifications from "expo-notifications";
 import Toast from "react-native-root-toast";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { type Notification, useNotificationStore } from "@/stores/notifications";
+import { useUpdateOrCreateToken } from "@/hooks/auth/update-token";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -19,6 +20,7 @@ Notifications.setNotificationHandler({
 export function NotificationsProvider(): null {
   const theme = useTheme();
   const { top } = useSafeAreaInsets();
+  const { mutateAsync } = useUpdateOrCreateToken();
   const { notifications, dismissNotification } = useNotificationStore();
 
   const getNotificationBackgroundColor = useCallback(
@@ -65,6 +67,21 @@ export function NotificationsProvider(): null {
 
     return token;
   }
+
+  async function updateExpoToken(): Promise<void> {
+    const token = await registerForPushNotificationsAsync();
+    if (token !== undefined) {
+      await mutateAsync({
+        token,
+        os: Platform.OS,
+        device: Platform.select({ android: Device.modelName, ios: Device.modelId }),
+      });
+    }
+  }
+
+  useEffect(() => {
+    updateExpoToken().catch(console.error);
+  }, []);
 
   useEffect(() => {
     const currentNotification: Notification | undefined = notifications[0];

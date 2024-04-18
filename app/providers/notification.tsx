@@ -4,6 +4,8 @@ import { useTheme } from "tamagui";
 import * as Device from "expo-device";
 import * as Constants from "expo-constants";
 import * as Notifications from "expo-notifications";
+import Toast from "react-native-root-toast";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { type Notification, useNotificationStore } from "@/stores/notifications";
 
 Notifications.setNotificationHandler({
@@ -16,6 +18,7 @@ Notifications.setNotificationHandler({
 
 export function NotificationsProvider(): null {
   const theme = useTheme();
+  const { top } = useSafeAreaInsets();
   const { notifications, dismissNotification } = useNotificationStore();
 
   const getNotificationBackgroundColor = useCallback(
@@ -66,18 +69,19 @@ export function NotificationsProvider(): null {
   useEffect(() => {
     const currentNotification: Notification | undefined = notifications[0];
     if (typeof currentNotification !== "undefined") {
-      dismissNotification(currentNotification.id);
-      Notifications.scheduleNotificationAsync({
-        trigger: null,
-        identifier: currentNotification.id,
-        content: {
-          title: "Thoth",
-          body: currentNotification.content,
-          color: getNotificationBackgroundColor(currentNotification.type),
+      Toast.show(currentNotification.content, {
+        shadow: true,
+        animation: true,
+        backgroundColor: getNotificationBackgroundColor(currentNotification.type),
+        textColor: theme.red10Light.get(),
+        duration: Toast.durations.LONG,
+        position: Toast.positions.TOP + top,
+        onHidden: () => {
+          dismissNotification(currentNotification.id);
         },
-      }).catch(console.error);
+      });
     }
-  }, [dismissNotification, getNotificationBackgroundColor, notifications]);
+  }, [dismissNotification, getNotificationBackgroundColor, notifications, theme]);
 
   return null;
 }
